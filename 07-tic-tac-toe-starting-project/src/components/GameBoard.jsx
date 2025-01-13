@@ -5,24 +5,32 @@ const initialGameBoard = [
   [[null], [null], [null]],
 ];
 export const GameBoard = () => {
-  useState();
+  const [GameBoard, setGameBoard] = useState(initialGameBoard);
+
+  function handleMovement(rowIndex, columnIndex) {
+    setGameBoard((preGameBoard) => {
+      const updateBoard = [
+        ...preGameBoard.map((innerArray) => [...innerArray]),
+      ];
+      updateBoard[rowIndex][columnIndex] = "X";
+      return updateBoard;
+    });
+  }
   return (
     <ol id="game-board">
-      {initialGameBoard.map((row, rowIndex) => {
-        return (
-          <li key={rowIndex}>
-            <ol>
-              {row.map((column, columnIndex) => {
-                return (
-                  <li key={columnIndex}>
-                    <button></button>
-                  </li>
-                );
-              })}
-            </ol>
-          </li>
-        );
-      })}
+      {GameBoard.map((row, rowIndex) => (
+        <li key={rowIndex}>
+          <ol>
+            {row.map((symbol, columnIndex) => (
+              <li key={columnIndex}>
+                <button onClick={() => handleMovement(rowIndex, columnIndex)}>
+                  {symbol}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </li>
+      ))}
     </ol>
   );
 };
