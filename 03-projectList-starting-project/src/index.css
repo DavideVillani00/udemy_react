@@ -5,13 +5,17 @@
 .container {
   @apply flex flex-col;
 }
-.btn {
+button {
   @apply px-4 py-2 rounded-md  text-stone-400 bg-stone-800  hover:text-white hover:bg-stone-600;
 }
 .input {
-  @apply bg-neutral-500;
+  @apply bg-neutral-200 text-zinc-900 border-slate-400 p-1 rounded-sm border-0 border-b-2;
 }
 
 .h1 {
   @apply font-bold text-3xl;
+}
+
+.inputSection {
+  @apply flex flex-col;
 }
