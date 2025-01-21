@@ -1,11 +1,18 @@
 import logo from "../assets/no-projects.png";
 import NewProject from "./NewProject.jsx";
 
-export default function ProjectSection({ creatingProject, onChangeCreating }) {
+export default function ProjectSection({
+  creatingProject,
+  onChangeCreating,
+  onCreateProject,
+}) {
   return (
     <div className="flex w-8/12 justify-center p-10">
       {creatingProject ? (
-        <NewProject onChangeCreating={onChangeCreating} />
+        <NewProject
+          onChangeCreating={onChangeCreating}
+          onCreateProject={onCreateProject}
+        />
       ) : (
         <div className="container justify-center items-center gap-5 ">
           <img

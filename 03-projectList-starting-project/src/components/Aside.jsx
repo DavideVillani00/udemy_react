@@ -11,9 +11,17 @@ export default function Aside({ onChangeCreating, projects }) {
         + Add project
       </button>
       <ol className="text-slate-50">
-        {projects.lenght > 0 ? (
+        {projects.length > 0 ? (
           projects.map((project) => (
-            <li key={project.title}>{project.title}</li>
+            <li
+              key={project.title}
+              onClick={() => {
+                onEditProject(project);
+              }}
+            >
+              {project.title}{" "}
+              <span className="text-neutral-500">{project.date}</span>
+            </li>
           ))
         ) : (
           <li>nessun progetto inserito</li>

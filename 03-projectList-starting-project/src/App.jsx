@@ -5,13 +5,26 @@ import { useState } from "react";
 
 function App() {
   const [creatingProject, setCreatingProject] = useState(false);
+  const [editingProject, setEditingProject] = useState(false);
   const [projects, setProjects] = useState([]);
 
   function handleSetCreating(bool) {
     if (bool === true && creatingProject === false) {
       setCreatingProject(true);
+      setEditingProject(false);
     } else if (bool === false && creatingProject === true) {
-      setCreatingProject(true);
+      setCreatingProject(false);
+      setEditingProject(false);
+    }
+  }
+
+  function handleSetEditing(bool) {
+    if (bool === true && editingProject === false) {
+      setCreatingProject(false);
+      setEditingProject(true);
+    } else if (bool === false && editingProject === true) {
+      setCreatingProject(false);
+      setEditingProject(false);
     }
   }
 
@@ -22,10 +35,17 @@ function App() {
 
   return (
     <main className="flex">
-      <Aside onChangeCreating={handleSetCreating} projects={projects} />
+      <Aside
+        onChangeCreating={handleSetCreating}
+        projects={projects}
+        onEditProject={onEditProject}
+      />
       <ProjectSection
         creatingProject={creatingProject}
-        onChangeCreating={handleSetCreating}
+        onChangeCreating={(bool) => handleSetCreating(bool)}
+        onCreateProject={(title, description, date) =>
+          handleCreateProject(title, description, date)
+        }
       />
     </main>
   );
