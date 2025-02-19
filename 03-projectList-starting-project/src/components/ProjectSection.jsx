@@ -1,36 +1,36 @@
-import logo from "../assets/no-projects.png";
 import NewProject from "./NewProject.jsx";
+import ProjectHome from "./ProjectHome.jsx";
+import ProjectInfo from "./ProjectInfo.jsx";
 
 export default function ProjectSection({
-  creatingProject,
-  onChangeCreating,
+  projectState,
+  projectSelected,
+  onSetProjectTasks,
   onCreateProject,
 }) {
-  return (
-    <div className="flex w-8/12 justify-center p-10">
-      {creatingProject ? (
+  console.log(projectSelected);
+  let mainTasks;
+  switch (projectState.projectTasks) {
+    case "creating":
+      mainTasks = (
         <NewProject
-          onChangeCreating={onChangeCreating}
+          onSetProjectTasks={onSetProjectTasks}
           onCreateProject={onCreateProject}
         />
-      ) : (
-        <div className="container justify-center items-center gap-5 ">
-          <img
-            src={logo}
-            alt="immagine taccuino con penna"
-            className="h-14 w-14"
-          />
-          <h1 className="h1">No project selected</h1>
-          <p>select a project or get started witch a new one</p>
-          <button
-            onClick={() => {
-              onChangeCreating(true);
-            }}
-          >
-            Create a new project
-          </button>
-        </div>
-      )}
-    </div>
-  );
+      );
+      break;
+    case "editing":
+      mainTasks = (
+        <ProjectInfo
+          projectSelected={projectSelected}
+          projectState={projectState}
+        />
+      );
+      break;
+
+    default:
+      mainTasks = <ProjectHome onSetProjectTasks={onSetProjectTasks} />;
+      break;
+  }
+  return <div className="flex w-8/12 justify-center p-10">{mainTasks}</div>;
 }

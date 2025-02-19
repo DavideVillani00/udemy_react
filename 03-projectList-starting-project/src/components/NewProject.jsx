@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function NewProject({ onChangeCreating, onCreateProject }) {
+export default function NewProject({ onSetProjectTasks, onCreateProject }) {
   const title = useRef();
   const description = useRef();
   const date = useRef();
@@ -9,11 +9,11 @@ export default function NewProject({ onChangeCreating, onCreateProject }) {
     let sanTitle = title.current.value;
     let sanDescription = description.current.value;
     let sanDate = date.current.value;
-    if (!sanTitle || sanTitle === "") {
+    if (!sanTitle || sanTitle.trim() === "") {
       console.log("inserisci un titolo valido");
       return;
     }
-    if (!sanDescription || sanDescription === "") {
+    if (!sanDescription || sanDescription.trim() === "") {
       console.log("inserisci una descrizione valida");
       return;
     }
@@ -23,9 +23,10 @@ export default function NewProject({ onChangeCreating, onCreateProject }) {
     }
     sanTitle = sanTitle.trim();
     sanDescription = sanDescription.trim();
-    sanDate = sanDate.trim();
+    console.log(sanTitle, sanDescription, sanDate);
+
     onCreateProject(sanTitle, sanDescription, sanDate);
-    onChangeCreating(false);
+    onSetProjectTasks(undefined);
   }
 
   return (
@@ -33,7 +34,7 @@ export default function NewProject({ onChangeCreating, onCreateProject }) {
       <div className=" flex justify-end gap-2">
         <button
           onClick={() => {
-            onChangeCreating(false);
+            onChangeCreating(undefined);
           }}
           className="bg-transparent text-slate-950"
         >

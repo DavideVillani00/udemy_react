@@ -4,48 +4,48 @@ import ProjectSection from "./components/ProjectSection.jsx";
 import { useState } from "react";
 
 function App() {
-  const [creatingProject, setCreatingProject] = useState(false);
-  const [editingProject, setEditingProject] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [projectState, setProjectState] = useState({
+    project: [],
+    projectTasks: undefined,
+  });
+  const [projectSelected, setProjectSelected] = useState();
 
-  function handleSetCreating(bool) {
-    if (bool === true && creatingProject === false) {
-      setCreatingProject(true);
-      setEditingProject(false);
-    } else if (bool === false && creatingProject === true) {
-      setCreatingProject(false);
-      setEditingProject(false);
-    }
-  }
-
-  function handleSetEditing(bool) {
-    if (bool === true && editingProject === false) {
-      setCreatingProject(false);
-      setEditingProject(true);
-    } else if (bool === false && editingProject === true) {
-      setCreatingProject(false);
-      setEditingProject(false);
-    }
+  function handleSetProjectTasks(value) {
+    setProjectState((preState) => {
+      return {
+        ...preState,
+        projectTasks: value,
+      };
+    });
   }
 
   function handleCreateProject(title, description, date) {
-    setProjects((preProj) => [...preProj, { title, description, date }]);
-    console.log(projects);
+    setProjectState((preState) => {
+      return {
+        ...preState,
+        project: [{ title, description, date }],
+      };
+    });
+    console.log(projectState);
+  }
+
+  function handleEditProject(project) {
+    setProjectSelected(project.title);
+    console.log(projectSelected);
   }
 
   return (
     <main className="flex">
       <Aside
-        onChangeCreating={handleSetCreating}
-        projects={projects}
-        onEditProject={onEditProject}
+        onSetProjectTasks={handleSetProjectTasks}
+        projectState={projectState}
+        onEditProject={handleEditProject}
       />
       <ProjectSection
-        creatingProject={creatingProject}
-        onChangeCreating={(bool) => handleSetCreating(bool)}
-        onCreateProject={(title, description, date) =>
-          handleCreateProject(title, description, date)
-        }
+        projectState={projectState}
+        projectSelected={projectSelected}
+        onSetProjectTasks={handleSetProjectTasks}
+        onCreateProject={handleCreateProject}
       />
     </main>
   );
