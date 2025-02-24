@@ -7,8 +7,11 @@ export default function ProjectSection({
   projectSelected,
   onSetProjectTasks,
   onCreateProject,
+  onAddTasks,
+  onDeleteProject,
+  inputTask,
+  onDeleteTask,
 }) {
-  console.log(projectSelected);
   let mainTasks;
   switch (projectState.projectTasks) {
     case "creating":
@@ -19,17 +22,21 @@ export default function ProjectSection({
         />
       );
       break;
-    case "editing":
-      mainTasks = (
-        <ProjectInfo
-          projectSelected={projectSelected}
-          projectState={projectState}
-        />
-      );
+    case undefined:
+      mainTasks = <ProjectHome onSetProjectTasks={onSetProjectTasks} />;
       break;
 
     default:
-      mainTasks = <ProjectHome onSetProjectTasks={onSetProjectTasks} />;
+      mainTasks = (
+        <ProjectInfo
+          inputTask={inputTask}
+          projectSelected={projectSelected}
+          projectState={projectState}
+          onAddTasks={onAddTasks}
+          onDeleteProject={onDeleteProject}
+          onDeleteTask={onDeleteTask}
+        />
+      );
       break;
   }
   return <div className="flex w-8/12 justify-center p-10">{mainTasks}</div>;

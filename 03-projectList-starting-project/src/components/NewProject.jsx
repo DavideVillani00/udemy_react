@@ -23,8 +23,6 @@ export default function NewProject({ onSetProjectTasks, onCreateProject }) {
     }
     sanTitle = sanTitle.trim();
     sanDescription = sanDescription.trim();
-    console.log(sanTitle, sanDescription, sanDate);
-
     onCreateProject(sanTitle, sanDescription, sanDate);
     onSetProjectTasks(undefined);
   }

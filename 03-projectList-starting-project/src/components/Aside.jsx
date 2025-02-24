@@ -12,11 +12,10 @@ export default function Aside({
       <ol className="text-slate-50">
         {projectState.project.length > 0 ? (
           projectState.project.map((project) => (
-            <li key={project.title}>
+            <li key={project.title} className="my-2">
               <button
                 onClick={() => {
-                  onSetProjectTasks("editing");
-                  onEditProject(project);
+                  onSetProjectTasks(project.title);
                 }}
               >
                 {project.title}{" "}
