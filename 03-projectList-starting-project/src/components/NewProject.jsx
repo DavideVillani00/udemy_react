@@ -10,15 +10,15 @@ export default function NewProject({ onSetProjectTasks, onCreateProject }) {
     let sanDescription = description.current.value;
     let sanDate = date.current.value;
     if (!sanTitle || sanTitle.trim() === "") {
-      console.log("inserisci un titolo valido");
+      alert("inserisci un titolo valido");
       return;
     }
     if (!sanDescription || sanDescription.trim() === "") {
-      console.log("inserisci una descrizione valida");
+      alert("inserisci una descrizione valida");
       return;
     }
     if (!sanDate) {
-      console.log("inserisci una data di scadenza");
+      alert("inserisci una data di scadenza");
       return;
     }
     sanTitle = sanTitle.trim();

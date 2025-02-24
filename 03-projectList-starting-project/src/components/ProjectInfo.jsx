@@ -1,3 +1,5 @@
+import Tasks from "./Tasks.jsx";
+
 export default function ProjectInfo({
   onAddTasks,
   projectState,
@@ -28,39 +30,12 @@ export default function ProjectInfo({
             </button>
           </div>
           <hr className="m-5" />
-          <div id="projectTasks">
-            <h2 className="text-3xl">Tasks</h2>
-            <input
-              type="text"
-              placeholder="Write new task"
-              className="w-96"
-              ref={inputTask}
-            />
-            <button
-              className="bg-transparent border-0 ml-2"
-              onClick={onAddTasks}
-            >
-              Add task
-            </button>
-            <ol className="bg-stone-100 p-5 mt-5 rounded-lg">
-              {console.log("project:", tasks)}
-              {tasks.length > 0 ? (
-                tasks.map((task, index) => {
-                  return (
-                    <li key={index} className="my-2">
-                      {/* da fare l'eliminazione della task */}
-                      <button onClick={() => onDeleteTask()} className="mx-2">
-                        X
-                      </button>
-                      {task}
-                    </li>
-                  );
-                })
-              ) : (
-                <li>nessuna task inserita</li>
-              )}
-            </ol>
-          </div>
+          <Tasks
+            onAddTasks={onAddTasks}
+            inputTask={inputTask}
+            onDeleteTask={onDeleteTask}
+            tasks={tasks}
+          />
         </>
       ) : (
         <h1>OOPS qualcosa è andato storto</h1>

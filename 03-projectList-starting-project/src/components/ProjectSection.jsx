@@ -4,7 +4,6 @@ import ProjectInfo from "./ProjectInfo.jsx";
 
 export default function ProjectSection({
   projectState,
-  projectSelected,
   onSetProjectTasks,
   onCreateProject,
   onAddTasks,
@@ -30,7 +29,6 @@ export default function ProjectSection({
       mainTasks = (
         <ProjectInfo
           inputTask={inputTask}
-          projectSelected={projectSelected}
           projectState={projectState}
           onAddTasks={onAddTasks}
           onDeleteProject={onDeleteProject}

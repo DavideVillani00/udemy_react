@@ -9,7 +9,6 @@ function App() {
     project: [],
     projectTasks: undefined,
   });
-  const [projectSelected, setProjectSelected] = useState();
 
   function handleSetProjectTasks(value) {
     setProjectState((preState) => {
@@ -45,6 +44,9 @@ function App() {
   }
 
   function handleAddTask() {
+    if (inputTask.current.value.trim() === "") {
+      return;
+    }
     const projectUpdate = projectState.project.map((project) => {
       if (project.title === projectState.projectTasks) {
         return {
@@ -64,13 +66,11 @@ function App() {
     });
   }
 
-  function handleDeleteTask() {
-    console.log("task", taskToDelete.current.textContent);
+  function handleDeleteTask(taskText) {
     const projectUpdate = projectState.project.map((project) => {
       if (project.title === projectState.projectTasks) {
         const tasksUpdating = project.tasks.filter((task) => {
-          console.log(task);
-          return task !== taskToDelete.current.value;
+          return task !== taskText;
         });
         return {
           ...project,
@@ -98,7 +98,6 @@ function App() {
       <ProjectSection
         inputTask={inputTask}
         projectState={projectState}
-        projectSelected={projectSelected}
         onSetProjectTasks={handleSetProjectTasks}
         onCreateProject={handleCreateProject}
         onEditProject={handleEditProject}
